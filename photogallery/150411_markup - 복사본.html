@@ -1,0 +1,171 @@
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>포토뷰어 :: 네이버 이미지검색</title>
+<link rel="shortcut icon" href="http://sstatic.naver.net/search/favicon/favicon_140327.ico">
+<link rel="stylesheet" type="text/css" href="http://sstatic.naver.net/search/imagesearch-ui/audirect/imgviewer_130429.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+  <div id="header">
+    <h1> <a href="http://www.naver.com/" target="_blank" onclick="return goOtherCR(this, 'a=vie.naverhome&amp;r=&amp;i=&amp;u='+urlencode(urlexpand(this.href)));"><img src="http://sstatic.naver.net/search/img3/h1_img_naver.gif" width="55" height="15" alt="NAVER"></a> <img src="http://sstatic.naver.net/search/img3/h1_img_search.gif" width="61" height="15" alt="이미지검색">
+      <div id="koreanclick" stype="display:none">
+        <iframe height="0" frameborder="0" width="0" scrolling="no" src="pv.html?rnd=http://imagesearch.naver.com/search.naver?sm=ext&amp;viewloc=1&amp;where=idetail&amp;rev=31&amp;query=%ED%8F%AC%ED%86%A0%EB%B7%B0%EC%96%B4&amp;section=image&amp;res_fr=0&amp;res_to=0&amp;ie=utf8&amp;face=0&amp;color=0&amp;ccl=0&amp;aq=0&amp;spq=1&amp;nx_search_query=%ED%8F%AC%ED%86%A0%EB%B7%B0%EC%96%B4&amp;nx_and_query=&amp;nx_sub_query=&amp;nx_search_hlquery=&amp;nx_search_fasquery=&amp;datetype=0&amp;startdate=0&amp;enddate=0&amp;start=1&amp;img_id=news0920001998197_11428715217624" id="frmWriteTime"></iframe>
+      </div>
+    </h1>
+  </div>
+  <div id="content" class="imscrs_on">
+    <div class="imgviewer" id="mainImageContent" style="height: 500px;">
+      <div class="imgviewer_inner" style="top: 149px;">
+        <div class="big_img" id="_imageLoadStatus"> <a href="#none" class="prev_big frst_big"><span class="sp_btn">이전 이미지</span></a>
+          <div class="img_area" style="display: block;" id="_imageComplete"> <a href="#none" class="sp_thmb" target="_blank"><img id="_imageObject" src="http://placehold.it/100/ED1C24?text=1" alt="이미지1" style="width: 480px; height: 360px;"><span class="thmb_v"></span></a></div>
+          <div class="img_area" id="_imageLoading" style="display: none;"> <a class="sp_thmb" href="#none"><img width="129" height="3" alt="로딩중" src="http://sstatic.naver.net/search/img3/loading.gif"></a> </div>
+          <div class="img_area" id="_imageExcess" style="display: none;">
+            <div class="sp_thmb"> <a href="#none" target="_blank" class="sp_thmb"><img><span class="thmb_v"></span></a>
+              <p>바로보기 뷰어 창 내에서 볼 수 없는 큰 이미지입니다.<br>
+                위 이미지를 클릭하시면, 원본 이미지를 보실 수 있습니다.</p>
+            </div>
+          </div>
+          <div class="img_area" id="_imageFail" style="display: none;">
+            <div class="sp_thmb"> <a href="#none" target="_blank"><img width="76" height="68" alt="원본이미지보기" src="http://sstatic.naver.net/search/img3/bg_ing_bk2.png"></a>
+              <p>선택하신 이미지를 불러올 수 없습니다.<br>
+                위 이미지를 클릭하시면, 원본 페이지로 이동합니다.</p>
+            </div>
+          </div>
+          <div class="img_area" id="_imageApiFail" style="display: none;">
+            <div class="sp_thmb"> <a class="sp_thmb" href="#none" target="_blank"><img width="76" height="68" alt="" src="http://sstatic.naver.net/search/img3/bg_ing_bk3.png"><span class="thmb_v"></span></a>
+              <p>선택하신 이미지를 불러올 수 없습니다.<br>
+                잠시 후, 다시 확인해주세요.</p>
+            </div>
+          </div>
+          <div class="img_area" id="_imageForeign" style="display: none;">
+            <div class="sp_thmb"> <a href="#none" target="_blank"><img><span class="thmb_v"></span></a>
+              <p>본 이미지는 웹에서 수집한 이미지입니다.<br>
+                원본 페이지에서 원래크기의 이미지를 확인하실 수 있습니다. <a href="#none" target="_blank" class="sp_btn btn_view">원본보기</a></p>
+            </div>
+          </div>
+          <div class="data_src" id="_imageExplain" style="display: block;">
+            <h3><a href="http://news.naver.com/main/read.nhn?mode=LSD&amp;mid=sec&amp;sid1=105&amp;oid=092&amp;aid=0001998197" target="_blank">네이버 포토뷰어 깜짝 변신</a></h3>
+            <a href="http://news.naver.com/main/read.nhn?mode=LSD&amp;mid=sec&amp;sid1=105&amp;oid=092&amp;aid=0001998197" class="tit_src" target="_blank" style="display: inline;">ZDNet Korea</a><a href="http://news.naver.com/main/read.nhn?mode=LSD&amp;mid=sec&amp;sid1=105&amp;oid=092&amp;aid=0001998197" class="url_src" target="_blank" style="display: inline;">http://news.naver.com/main/read.nhn?mode=LSD&amp;mid=sec&amp;sid1=...</a> </div>
+          <a href="#none" class="next_big"><span class="sp_btn">다음 이미지</span></a> </div>
+      </div>
+    </div>
+    <div class="group_data" id="mainImageAdditional">
+      <div class="img_for_doc" id="_imageInDoc" style="display: block;">
+        <h4><img src="http://sstatic.naver.net/search/img3/ico_loading_thmb2.gif" width="17" height="17" alt="로딩중" class="ico_loading" style="display: none;">문서내이미지<span class="img_count"><em>1</em>건</span></h4>
+        <a href="#none" class="sp_btn prev_img frst_img">이전</a>
+        <div class="sp_bg scr_docimg">
+          <ul style="visibility: visible;">
+            <li id="_news0920001998197_1" class="on"><a href="#none"><img id="news0920001998197_1" src="" width="30" height="30" alt="" ></a></li>
+          </ul>
+        </div>
+        <a href="#none" class="sp_btn next_img last_img">다음</a> </div>
+      <div class="img_data" id="_imageInfoAndReport" style="display: block; bottom: 10px;">
+        <ul>
+          <li class="frst">2012.03.29</li>
+          <li>480X360</li>
+          <li>41KB</li>
+          <li>JPG</li>
+        </ul>
+        <div class="report_area">
+          <div class="ccl_report reprot_sep1">
+            <div class="info_ccl" style="display: none;"> <a href="#none" class="imsch_ccl" target="_blank"><em>CCL</em></a>
+              <div class="con_layer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="imscrs" id="thumbnailContent" style="visibility: visible;">
+      <div class="tit_isrs" id="_thumbnailTop">
+        <h2><strong>포토뷰어</strong> 검색결과</h2>
+        <span class="isrs_count"><em>1-17</em> / <em>2,925</em>건</span> </div>
+      <div class="box_imgrs" id="_thumbnailImage">
+        <ul>
+          <li><a href="#img1" class="sp_thmb on"><img id="img1" src="http://placehold.it/100/ED1C24?text=1" alt="이미지1"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img2" class="sp_thmb "><img id="img2" src="http://placehold.it/100/FF7F27?text=2" alt="이미지2"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img3" class="sp_thmb "><img id="img3" src="http://placehold.it/100/FFF200?text=3" alt="이미지3"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img4" class="sp_thmb "><img id="img4" src="http://placehold.it/100/22B14C?text=4" alt="이미지4"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img5" class="sp_thmb "><img id="img5" src="http://placehold.it/100/00A2E8?text=5" alt="이미지5"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img6" class="sp_thmb "><img id="img6" src="http://placehold.it/100/3F48CC?text=6" alt="이미지6"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img7" class="sp_thmb "><img id="img7" src="http://placehold.it/100/A349A4?text=7" alt="이미지7"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img8" class="sp_thmb "><img id="img8" src="http://placehold.it/100/C8BFE7?text=8" alt="이미지8"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img9" class="sp_thmb "><img id="img9" src="http://placehold.it/100/7092BE?text=9" alt="이미지9"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img10" class="sp_thmb "><img id="img10" src="http://placehold.it/100/99D9EA?text=10" alt="이미지10"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img11" class="sp_thmb "><img id="img11" src="http://placehold.it/100/B5E61D?text=11" alt="이미지11"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img12" class="sp_thmb "><img id="img12" src="http://placehold.it/100/EFE4B0?text=12" alt="이미지12"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img13" class="sp_thmb "><img id="img13" src="http://placehold.it/100/FFC90E?text=13" alt="이미지13"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img14" class="sp_thmb "><img id="img14" src="http://placehold.it/100/FFAEC9?text=14" alt="이미지14"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img15" class="sp_thmb "><img id="img15" src="http://placehold.it/100/B97A57?text=15" alt="이미지15"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img16" class="sp_thmb "><img id="img16" src="http://placehold.it/100/C3C3C3?text=16" alt="이미지16"><span class="thmb_v"></span><span class="mask"></span></a></li>
+          <li><a href="#img17" class="sp_thmb "><img id="img17" src="http://placehold.it/100/AB9586?text=17" alt="이미지17"><span class="thmb_v"></span><span class="mask"></span></a></li>
+        </ul>
+      </div>
+
+  </div>
+</div>
+<script>
+  function imageSearch(selector){
+    var that = this,
+        num = 0;
+    this.selector = $(selector);
+    this.imageArea = this.selector.find('.imgviewr');
+    this.viewArea = this.selector.find('.big_img');
+    this.navPrev = this.selector.find('.prev_big');
+    this.navNext = this.selector.find('.next_big');
+    this.imageView = this.viewArea.find('#_imageObject');
+    this.imgBox = this.selector.find('.box_imgrs');
+    this.imgList = this.imgBox.find('li a.sp_thmb');
+
+    this.choiceImg = function(e){
+      if(e)e.preventDefault();
+
+      var $th = $(this),
+          idx = that.imgList.index($th),
+          $th_href = $th.attr('href'),
+          $th_src = $($th_href).attr('src'),
+          $th_alt = $($th_href).attr('alt');
+          that.imgList.removeClass('on');
+          $th.addClass('on');
+          that.imageView.attr({
+            'src':$th_src,
+            'alt':$th_alt
+          });
+          console.log(idx);
+
+      num = that.imgList.index($th)
+
+    };
+    that.imgList.on('click',this.choiceImg);
+ 
+    this.imgViewerPrev = function(){
+      console.log(num);
+      if (num <= 0) {
+        that.navPrev.addClass('frst_big');
+      }else{
+      num--;
+      that.navNext.removeClass('last_big');
+      that.imgList.eq(num).trigger('click');  
+      }
+    
+    };
+    this.imgViewerNext = function(){
+    console.log(num);
+     if (num >= that.imgList.length) {
+      that.navNext.addClass('last_big');
+     }else{
+      num++;
+      that.navPrev.removeClass('frst_big');
+      that.imgList.eq(num).trigger('click');
+     }
+    }; 
+    this.navPrev.on('click',this.imgViewerPrev);
+    this.navNext.on('click',this.imgViewerNext);
+
+  };
+  var getImageSearch = new imageSearch('.imscrs_on');
+
+</script>
+</body>
+</html>

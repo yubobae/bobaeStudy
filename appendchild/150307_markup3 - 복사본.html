@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+	.side01 { float:left; width:40%; background:gold; color:red; min-height:500px; overflow:auto; }
+	.side02 { float:right; width:40%; background:gold; color:red; min-height:500px; overflow:auto; }
+
+	.result { clear:both; }
+	</style>
+</head>
+<body>
+	<div id="itemArea">
+		<section class="side01">
+		<ul>
+			<li><span>Item 01</span><button type="button"><span>우측이동</span></button></li>
+			<li><span>Item 02</span><button type="button"><span>우측이동</span></button></li>
+			<li><span>Item 03</span><button type="button"><span>우측이동</span></button></li>
+			<li><span>Item 04</span><button type="button"><span>우측이동</span></button></li>
+			<li><span>Item 05</span><button type="button"><span>우측이동</span></button></li>
+			<li><span>Item 06</span><button type="button"><span>우측이동</span></button></li>
+			<li><span>Item 07</span><button type="button"><span>우측이동</span></button></li>
+		</ul>
+		</section>
+		
+		<section class="side02">
+		<ul>
+			<li><span>sItem 01</span><button type="button"><span>좌측이동</span></button></li>
+			<li><span>sItem 02</span><button type="button"><span>좌측이동</span></button></li>
+			<li><span>sItem 03</span><button type="button"><span>좌측이동</span></button></li>
+		</ul>
+		</section>
+		
+		<div class="result">
+			<label for="addItem">좌측에 노드 삽입</label>
+			<input type="text" id="addItem" />
+			<input type="button" value="삽입하기 버튼" />
+		</div>
+		<p>이동 시에는 제이쿼리의 .append를 활용해도 좋습니다. <br />
+		(but) appendchild 라는 것을 구글 검색으로 찾아보면, jquery가 필요하진 않습니다.<br />
+		이 예제는 실제로 2년차 퍼블리셔에게 js의 능력을 평가하는 지표로서 naver가 활용하였습니다.<br />
+		다만 네이버 제시 예제보다 어렵습니다. 고고!</p>
+	</div>
+	<script>
+	
+		
+		 function appendList(selector) {
+		 		
+		 	var that = this;
+
+		 	this.selector = $(selector);
+		 	this.list = this.selector.find('li');
+		 	this.buttonMom =this.selector.find('ul');
+		 	this.button =this.list.find('button');
+
+		 	this.buttonMom.on('click','li button',this.moveList);
+		 	this.addItemBtn.on('click',this.addItemList)
+
+
+		 };
+
+
+		 	appendList.prototype.rightArea = this.selector.find('.side02 ul');
+		 	appendList.prototype.leftArea = this.selector.find('.side01 ul');
+		 	appendList.prototype.addItemBtn = this.selector.find('.result input[type=button]');
+		 	appendList.prototype.addItemFom = this.selector.find('.result input[type=text]');
+
+
+		 	// this.selector.on("addItem", fn);
+		 	// this.addItemBtn.on("click", function() { that.selector.trigger('addItem') });
+
+
+		 	appendList.prototype.addItemList = function() {
+
+		 		var textVal = that.addItemFom.val(),
+		 			$newItem = $('<li></li>'),
+		 			$innerText = $('<span></span>').text(textVal),
+		 			$btnText = $('<span></span>').text('우측이동'),
+		 			$innerBtn = $('<button></button>').attr('type','button');
+		 		$btnText.appendTo($innerBtn);
+		 		$newItem.append($innerText,$innerBtn);
+		 	    $newItem.appendTo(that.leftArea);
+		 	};
+			appendList.prototype.moveList = function() {
+
+		 		var $th = $(this); 
+		 		var itemIn =$th.parents('section');
+
+		 		if (itemIn.hasClass('side01')) {
+		 			$th.parent().appendTo('.side02 ul');
+		 			$th.find('span').text('좌측이동');
+		 		}else{
+		 			$th.parent().appendTo('.side01 ul');
+		 			$th.find('span').text('우측이동');
+		 		};
+		 		
+		 	};
+
+		 	
+		 var getAppendList1 = new appendList('#itemArea');
+		
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>스터디 150110</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		h2 { }
+		a { color: inherit;text-decoration: none; }
+		ul { margin:5px 0 0 0; padding:0; }
+		li { font-size:12px; line-height:20px; }
+		button { cursor:pointer; }
+		.container { border:2px solid #090b6f; overflow:hidden; border-radius:5px; }
+		.container > .sidenav { float:left; width:25%; background:#090b6f; color:white; height:300px; }
+		.container > .sidenav h2 { color:yellow; font-size:13px; padding:0 0 0 10px; margin:20px 0 15px; }
+
+		.container > .sidenav li { list-style:none; font-size:12px;}
+		.container > .sidenav li a{display: block; line-height:20px; padding:0 0 0 10px; }
+
+		.container > .sidenav li a.hover { background:#2c3ec5; }
+		
+		.container > .sidenav > .top .menu { display:none; }
+
+		.container > .content { float:left; width:75%; }
+		.container > .content { position:relative; }
+		.container > .content .contentzone { display:none; padding:30px 20px; font-size:14px; background:#90adff; height:240px; color:white; font-weight:bold; }
+		.container > .content .button { position:absolute; right:10px; top:10px; }
+	</style>
+</head>
+<body>
+<h1>사용자의 동작에 반응 하는 메뉴</h1>+
+<p>참고 : http://section.blog.naver.com/</p>
+
+<div class="container">
+	<div class="sidenav">
+		
+		<div class="topic">
+			<h2>Hot Topic</h2>+
+			<ul>
+				<li><a href="#con1" class="hover"><span>사탕대신</span></a></li>
+				<li><a href="#con2"><span>영화볼 때 이 음식</span></a></li>
+				<li><a href="#con3"><span>달콤한 디저트</span></a></li>
+			</ul>
+		</div>
+
+		<div class="top">
+			<h2>
+				오늘의 Top
+				<span class="button">
+					<button type="button" class="prev"><span>이전</span></button>
+					<button type="button" class="next"><span>다음</span></button>
+				</span>
+			</h2>
+
+			<div class="menu content01" style="display:block">
+				<ul>
+					<li><a href="#con4"><span>사진</span></a></li>
+					<li><a href="#con5"><span>세계여행</span></a></li>
+				</ul>
+			</div>
+
+			<div class="menu content02">
+				<ul>
+					<li><a href="#con6"><span>문학.책</span></a></li>
+					<li><a href="#con7"><span>영화</span></a></li>
+					<li><a href="#con7"><span>드라마</span></a></li>
+				</ul>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="content">
+		
+		<div class="button">
+			<button type="button" class="prev"><span>이전</span></button>
+			<button type="button" class="next"><span>다음</span></button>
+		</div>
+
+		<div id="con1" class="contentzone content01 " style="display:block">
+			<p>사탕대신</p>
+		</div>
+
+		<div id="con2" class="contentzone content02 ">
+			<p>영화볼 때 이 음식</p>
+		</div>
+
+		<div id="con3" class="contentzone content03 ">
+			<p>달콤한 디저트</p>
+		</div>
+
+		<div id="con4" class="contentzone content04 ">
+			<p>사진</p>
+		</div>
+
+		<div id="con5" class="contentzone content05 ">
+			<p>세계여행</p>
+		</div>
+
+		<div id="con6" class="contentzone content06 ">
+			<p>문학.책</p>
+		</div>
+
+		<div id="con7" class="contentzone content07 ">
+			<p>영화</p>
+		</div>
+
+		<div id="con8" class="contentzone content08 ">
+			<p>드라마</p>
+		</div>
+
+	</div>
+
+</div>
+
+<h3>기능</h3>
+<ol>
+	<li>Hot Topic, 오늘의 Top의 메뉴를 오버 했을 때, 해당 컨텐츠가 오른쪽에 display:block 됨.<br />이벤트를 배우지 않았기 때문에, jquery의 .on(추천) 또는 .bind 기능을 사용하세요~ 혹은 .onmouseover 혹은 .addEventListener</li>
+	<li>오늘의 Top 의 "이전, 다음" 버튼은 오늘의 Top의 2개의 메뉴(.menu.content01,.menu.content02) 가 번갈아 보여짐.</li>
+	<li>컨텐츠의 "이전, 다음" 버튼은 현재 섹션 에서 다음 섹션으로 변경됨.<br />예를 들어 [사탕대신] 상태 에서 누르면 [영화볼 때 이 음식] 으로 감. 다시 누르면 [달콤한 디저트]로 이동. 다시 누르면 [사탕대신] 으로 이동.<br />
+		[사진] 상태 에서 누르면 [세계여행] 으로 이동, 다시 누르면 [사진] 으로 이동.
+	</li>
+</ol>
+
+<script type="text/javascript">
+	function hoverMenu(select) {
+
+		var that = this;
+		
+		this.select = $(select);
+		this.sidemenu = this.select.find('li a');
+		this.contentzone = this.select.find('.contentzone');
+		this.menuPrev = this.select.find('.top .prev');
+		this.menuNext = this.select.find('.top .next');
+		this.chageMenu = this.select.find('.top .menu');
+		this.conPrev = this.select.find('.content .prev');
+		this.conNext = this.select.find('.content .next');
+		
+		this.sideHover = function(e){//side 메뉴 호버 했을때 전체 li 인덱스값
+			e.preventDefault();
+			var $th = $(this);
+			var conView = $($th.attr('href'));
+			that.sidemenu.removeClass('hover');
+			that.contentzone.css('display','none');
+			$th.addClass('hover');
+			conView.css('display','block');
+			
+		};
+		function contentRolling(select){
+			
+			this.select = $(select);
+			var num = 0;
+			var selectList = this.select.find('li');
+			
+			this.contentNext = function(){
+			var listA = $(selectList).eq(num).find('a');;
+			var listView = $(listA.attr('href'));
+				num++;
+				if (num >= 3) {
+					num = 0;
+					listA.addClass('hover');
+					listView.css('display','block');
+				}
+				that.sidemenu.removeClass('hover');
+				that.contentzone.css('display','none');
+				listA.addClass('hover');
+				listView.css('display','block');
+
+				console.log('N '+num);
+			};
+			this.contentPrev = function(){
+				num--;
+				var listA = $(selectList).eq(num).find('a');;
+				var listView = $(listA.attr('href'));
+				if (num < 0) {
+					num = 2;
+					listA.addClass('hover');
+					listView.css('display','block');
+				}
+				that.sidemenu.removeClass('hover');
+				that.contentzone.css('display','none');
+				listA.addClass('hover');
+				listView.css('display','block');
+				console.log('P '+num);
+			};
+
+			that.conNext.on('click',this.contentNext);
+			that.conPrev.on('click',this.contentPrev);
+		};
+		var getContentMenu1 = new contentRolling('.topic');
+		
+		this.sidenext = function(){
+			that.chageMenu.css('display','none');
+			that.chageMenu.eq(1).css('display','block');
+		};
+		this.sideprev = function(){
+			that.chageMenu.css('display','none');
+			that.chageMenu.eq(0).css('display','block');
+		};
+		
+		this.sidemenu.on('mouseenter',this.sideHover);
+		this.menuNext.on('click',this.sidenext);
+		this.menuPrev.on('click',this.sideprev);
+		
+		
+	};
+	var getHoverMenu = new hoverMenu('.container');
+	
+</script>
+</body>
+</html>

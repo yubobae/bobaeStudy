@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="buttonContainer">
+		<button data-id="3">3단출력</button>
+		<button data-id="6">6단출력</button>
+		<button data-id="9"">9단출력</button>
+		<button id="clear">지우기</button>
+	</div>
+	<div id="output">
+		
+	</div>
+	<script>
+		$(function(){
+			var getMY99DAN = new MY99DAN('#output');
+		});
+
+		function MY99DAN(selector, buttonSelector) {
+			var that = this;
+			this.selector = $(selector);
+			$('#buttonContainer button').on("click", function(e) {
+				that.printdan( $(this).data('id') );
+
+			});
+		};
+		
+		MY99DAN.prototype.print99dan = function(dan){
+			var result = '';
+			for (var i = 1; i <= 9; i++) {
+				result += dan+"*"+i+"="+(dan*i)+"<br>"
+			}
+			this.selector.html(result);
+		};
+
+		MY99DAN.prototype.printdan = function(n){
+			this.print99dan(n);
+		};
+	</script>
+</body>
+</html>

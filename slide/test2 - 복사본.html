@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		/*reset*/
+		*{margin: 0;padding: 0;}
+		li{list-style:none;}
+		a{text-decoration: none;color:inherit;}
+		/*layout*/
+		 .wrapper{width: 300px;height:200px; margin: 30px auto;position: relative;}
+		 .wrapper .mainSlide{overflow: hidden;}
+		 .wrapper .mainSlide .slide_list{width:500%;}
+		 .wrapper .mainSlide .slide_list li{float: left;width: 300px;height: 100%;text-align: center;color: #fff;font-size:30px;line-height:200px;background-color: #ccc;}
+
+
+		 .dot{position: absolute;bottom: 10px;left: 50%;margin-left:-60px;}
+		 .dot ul{overflow: hidden;}
+		 .dot li{float: left;margin:0 10px;}
+		 .dot li {display: block;width: 10px;height: 10px;background-color: #fff;border-radius:5px;text-indent:-99999999px;}
+		 .dot li.ative{background-color:#666;}
+
+		 .slide_nav li{position: absolute;top: 50%;margin-top: -10px;}
+		 .slide_nav li:nth-child(1){left:-40px;}
+		 .slide_nav li:nth-child(2){right:-40px;}
+
+	</style>
+</head>
+<body>
+<div id="mainCarousel">
+
+    <div class="wrapper">
+        <div class="mainSlide">
+	       	 <ul class="slide_list">
+	       	    <li>1</li>
+	       	    <li>2</li>
+	       	    <li>3</li>
+	       	    <li>4</li>
+	       	    <li>1</li>
+	       	</ul>
+        </div> 
+
+	    <div class="dot">
+	        <ul>
+	            <li class="ative"><a href="#">page1</a></li>
+	            <li><a href="#">page2</a></li>
+	            <li><a href="#">page3</a></li>
+	            <li><a href="#">page4</a></li>
+	            
+	        </ul>
+	    </div>
+
+		<div class="slide_nav">
+			<ul>
+				<li><a href="#" class="prev">prev</a></li>
+				<li><a href="#" class="next">next</a></li>
+			</ul>
+		</div>
+    </div>
+
+</div>
+<script>
+	function carousel(selector){
+		var that =this;
+		this.selector = $(selector);
+		this.list = this.selector.find('slide_list');
+		this.dotList = this.selector.find('.dot li');
+		this.totalNum = this.list.find('li').lenth - 1;
+		this.num = 0;
+
+		this.buttonPrev = this.selector.find('.prev');
+		this.buttonNext = this.selector.find('.next');
+
+		this.buttonNext.on('click', this.next);
+		this.buttonPrev.on('click', this.prev);
+	};
+	carousel.prototype.prev = function(e) {
+		e.preventDefault();
+		if (that.num <=0) {
+			that.num = 4;
+			that.list.css({'margin-left':-that.num*100+'%'});
+		}else{
+			that.num = that.num - 1;
+			that.list.stop().animate({'margin-left':-that.num*100+'%'});
+		};
+		carousel.prototype.currentCount();
+
+	};
+	carousel.prototype.next = function(e){
+		e.preventDefault();
+		if(that.num >= 4){
+			that.num =0;
+			that.list.css({'margin-left':-that.num*100+'%'});
+		}else{
+			that.num = that.num + 1;
+			that.list.stop().animate({'margin-left':-that.num*100+'%'});
+		}
+		carousel.prototype.currentCount();
+	};
+	carousel.prototype.currentCount = function() {
+		that.dotList.removeClass('ative');
+		that.dotList.eq(that.num).addClasss('ative');
+	};
+
+var getCarouselObject = new carousel('#mainCarousel');
+
+</script>
+</body>
+</html>

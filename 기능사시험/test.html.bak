@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+	//예제1
+	var A = function() {
+	this.x = function() {
+	 };
+	};
+	//예제2
+	var A = function() { };
+	A.prototype.x = function(){};
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

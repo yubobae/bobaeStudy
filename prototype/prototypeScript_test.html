@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="buttonContainer">
+		<button data-id="3">3단출력</button>
+		<button data-id="6">6단출력</button>
+		<button data-id="9">9단출력</button>
+	</div>
+	<div id="output">
+		
+	</div>
+	<script>
+		$(function(){
+			var gatMydan = new Mydan();
+		});
+		function Mydan() {
+			var that = this;
+			this.$output = $('#output');
+			$('#buttonContainer button').on('click',function(){
+				that.printDan($(this).data('id'));
+			});
+		};
+		Mydan.prototype.print99Dan = function(dan){
+			var result = '';
+			for (var i = 1; i <=9; i++) {
+				result += dan+'X'+i+'='+(dan*i)+'<br>'
+			}
+			this.$output.html(result);
+		};
+		Mydan.prototype.printDan = function(n){
+			this.print99Dan(n);
+		};
+
+	</script>
+</body>
+</html>

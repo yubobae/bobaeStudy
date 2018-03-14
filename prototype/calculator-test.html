@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>계산기</title>
+		<style>
+			input{width: 50px;}
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="buttonWrap">
+			<label for="inp_val1">숫자1 </label><input type="text" id="inp_val1">
+			<label for="inp_op">연산자 </label><input type="text" id="inp_op">
+			<label for="inp_val2">숫자2 </label><input type="text" id="inp_val2">
+			<button id="cal" type="button">확인</button>
+		</div>
+		<div id="output">
+		
+		</div>
+		<script>
+		$(function(){
+			var options = {
+				inputElement : ['#inp_val1','#inp_val2'],
+				opertor : '#inp_op',
+				submitButton : '#cal',
+				resultArea : '#output'
+			}
+			var getCalculator = new Calculator(options);
+		});
+		function Calculator(options) {
+			var that = this;
+			this.$value1 = $(options.inputElement[0]);
+			this.$opertor = $(options.opertor);
+			this.$value2 = $(options.inputElement[1]);
+			this.$output = $(options.resultArea);
+			$(options.submitButton).on('click',function(){
+				that.exeOp();
+			});
+		};
+		Calculator.prototype.print = function(op,num1,num2){
+			var result = '';
+			switch(op){
+				case '+':
+					result = num1+num2;
+					break;
+				case '-':
+					result = num1-num2;
+					break;
+				case '*':
+					result = num1*num2;
+					break;
+				case '/':
+					result = num1/num2;
+					break;
+				default : 
+					result = '지원하지 않는 연산자입니다.'
+			}
+			this.$output.html(result);
+		};
+		Calculator.prototype.exeOp = function(){
+			var value1 = parseInt(this.$value1.val());
+			var opertor = this.$opertor.val();
+			var value2 = parseInt(this.$value2.val());
+
+			this.print(opertor,value1,value2)
+		};
+		</script>
+	</body>
+</html>

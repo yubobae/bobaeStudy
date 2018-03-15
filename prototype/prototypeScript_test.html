@@ -15,27 +15,27 @@
 		
 	</div>
 	<script>
-		$(function(){
-			var gatMydan = new Mydan();
+	$(function(){
+		var getMy99dan = new My99dan('#output');
+	});
+	function My99dan(select) {
+		var that = this;
+		this.$output = $(select);
+		
+		$('#buttonContainer button').on('click',function(){
+			that.print($(this).data('id'));
 		});
-		function Mydan() {
-			var that = this;
-			this.$output = $('#output');
-			$('#buttonContainer button').on('click',function(){
-				that.printDan($(this).data('id'));
-			});
-		};
-		Mydan.prototype.print99Dan = function(dan){
-			var result = '';
-			for (var i = 1; i <=9; i++) {
-				result += dan+'X'+i+'='+(dan*i)+'<br>'
-			}
-			this.$output.html(result);
-		};
-		Mydan.prototype.printDan = function(n){
-			this.print99Dan(n);
-		};
-
+	};
+	My99dan.prototype.printDan = function(dan){
+		var result = '';
+		for (var i = 1; i <=9; i++) {
+			result += dan+'X'+i+'='+(dan*i)+'<br>'
+		}
+		this.$output.html(result);
+	};
+	My99dan.prototype.print = function(n){
+		this.printDan(n);
+	};
 	</script>
 </body>
 </html>

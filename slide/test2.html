@@ -97,7 +97,10 @@ function carousel(selector) {
     		
     	that.num = that.num + 1;
     	console.log(that.num);
-    	that.list.stop().animate({'margin-left':-that.num*100+'%'});
+    	that.list.stop().animate({'margin-left':-that.num*100+'%'},1000);
+    	that.list.find('li').eq(that.num-1).stop().animate({'opacity':0},1000,function(){
+    		that.list.find('li').eq(that.num-1).css({'opacity':1})
+    	});
     	}
     	that.currentCount();
     }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>심플갤러리</title>
+		 <style>
+        body {
+            font-size:9pt;
+        }
+        div.image-container{
+            position: relative;
+            border:1px solid #000;
+            height:600px;
+        }
+
+        div.image-container img{
+            position: absolute;
+            left:0;
+            top:0;
+            width:120px;
+        }
+    	</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<p>container1</p>
+		<div class="image-container" id="container1">
+			<img src="images/1.png" alt="이미지1">
+			<img src="images/2.png" alt="이미지2">
+			<img src="images/3.png" alt="이미지3">
+			<img src="images/4.png" alt="이미지4">
+			<img src="images/5.png" alt="이미지5">
+			<img src="images/6.png" alt="이미지6">
+			<img src="images/7.png" alt="이미지7">
+			<img src="images/8.png" alt="이미지8">
+		</div>
+		<p>container2</p>
+		<div class="image-container" id="container2">
+			<img src="images/1.png" alt="이미지1">
+			<img src="images/2.png" alt="이미지2">
+			<img src="images/3.png" alt="이미지3">
+			<img src="images/4.png" alt="이미지4">
+			<img src="images/5.png" alt="이미지5">
+			<img src="images/6.png" alt="이미지6">
+			<img src="images/7.png" alt="이미지7">
+			<img src="images/8.png" alt="이미지8">
+		</div>
+		<script>
+			$(function(){
+				var getSimpleGallrey1 = new SimpleGallrey({
+					selector : '#container1 img',
+					count : 6
+				});
+				getSimpleGallrey1.showSlide();
+				var getSimpleGallrey2 = new SimpleGallrey({
+					selector : '#container2 img'
+				});
+				getSimpleGallrey2.showSlide();
+			});
+			function SimpleGallrey(option) {
+				this.$images = $(option.selector);
+				this.count = option.count;
+				this.imageWidth = option.width;
+				this.imageHeight = option.height;
+				this.setDafaultValue();
+			};
+			SimpleGallrey.prototype.showSlide = function(){
+				var length = this.$images.length;
+
+				for (var i = 0; i<length; i++) {
+					var $img = this.$images.eq(i);
+					var x = 100+((i%this.count)*this.imageWidth);
+					var y = 100+(parseInt(i/this.count)*this.imageHeight);
+					 $img.css({
+                    left:x,
+                    top:y
+               		});
+					console.log(x);
+				}
+			};
+			SimpleGallrey.prototype.setDafaultValue = function(){
+				if (this.count==null) 
+					this.count=5;
+				
+				if (this.imageWidth==null) 
+					this.imageWidth=150;
+				
+				if (this.imageHeight==null) 
+					this.imageHeight=150;
+			};
+
+		</script>
+	</body>
+</html>

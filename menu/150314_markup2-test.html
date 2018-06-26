@@ -34,7 +34,7 @@
 <div class="container">
 	<div class="sidenav">
 		
-		<div class="topic">
+		<div class="topic" data-area="area1">
 			<h2>Hot Topic</h2>+
 			<ul>
 				<li><a href="#con1" class="hover"><span>사탕대신</span></a></li>
@@ -52,14 +52,14 @@
 				</span>
 			</h2>
 
-			<div class="menu content01" style="display:block">
+			<div class="menu" data-area="area2" style="display:block">
 				<ul>
 					<li><a href="#con4"><span>사진</span></a></li>
 					<li><a href="#con5"><span>세계여행</span></a></li>
 				</ul>
 			</div>
 
-			<div class="menu content02">
+			<div class="menu" data-area="area3">
 				<ul>
 					<li><a href="#con6"><span>문학.책</span></a></li>
 					<li><a href="#con7"><span>영화</span></a></li>
@@ -124,89 +124,107 @@
 </ol>
 
 <script type="text/javascript">
-	function hoverMenu(select) {
+	$(function() {
 
-		var that = this;
-		
-		this.select = $(select);
-		this.sidemenu = this.select.find('li a');
-		this.contentzone = this.select.find('.contentzone');
-		this.menuPrev = this.select.find('.top .prev');
-		this.menuNext = this.select.find('.top .next');
-		this.chageMenu = this.select.find('.top .menu');
-		this.conPrev = this.select.find('.content .prev');
-		this.conNext = this.select.find('.content .next');
-		
-		this.sideHover = function(e){//side 메뉴 호버 했을때 전체 li 인덱스값
-			e.preventDefault();
-			var $th = $(this);
-			var conView = $($th.attr('href'));
-			that.sidemenu.removeClass('hover');
-			that.contentzone.css('display','none');
-			$th.addClass('hover');
-			conView.css('display','block');
-			
+		var option = {
+			menu : '.sidenav',
+			contentzone : '.contentzone',
+			conPrev : '.content .prev',
+			conNext : '.content .next',
+			topPrev : '.top .prev',
+			topNext : '.top .next',
+			topMenu : '.top .menu'
 		};
-		function contentRolling(select){
-			
-			this.select = $(select);
-			var num = 0;
-			var selectList = this.select.find('li');
-			
-			this.contentNext = function(){
-			var listA = $(selectList).eq(num).find('a');;
-			var listView = $(listA.attr('href'));
-				num++;
-				if (num >= 3) {
-					num = 0;
-					listA.addClass('hover');
-					listView.css('display','block');
-				}
-				that.sidemenu.removeClass('hover');
-				that.contentzone.css('display','none');
-				listA.addClass('hover');
-				listView.css('display','block');
 
-				console.log('N '+num);
-			};
-			this.contentPrev = function(){
-				num--;
-				var listA = $(selectList).eq(num).find('a');
-				var listView = $(listA.attr('href'));
-				if (num < 0) {
-					num = 2;
-					listA.addClass('hover');
-					listView.css('display','block');
-				}
-				that.sidemenu.removeClass('hover');
-				that.contentzone.css('display','none');
-				listA.addClass('hover');
-				listView.css('display','block');
-				console.log('P '+num);
-			};
+		var getHoverMenu = new HoverMenu(option);
+	});
 
-			that.conNext.on('click',this.contentNext);
-			that.conPrev.on('click',this.contentPrev);
-		};
-		var getContentMenu1 = new contentRolling('.topic');
+	function HoverMenu(option) {
 		
-		this.sidenext = function(){
-			that.chageMenu.css('display','none');
-			that.chageMenu.eq(1).css('display','block');
-		};
-		this.sideprev = function(){
-			that.chageMenu.css('display','none');
-			that.chageMenu.eq(0).css('display','block');
-		};
-		
-		this.sidemenu.on('mouseenter',this.sideHover);
-		this.menuNext.on('click',this.sidenext);
-		this.menuPrev.on('click',this.sideprev);
-		
-		
+		this.$menu = $(option.menu);
+		this.list = this.$menu.find('a');
+		this.$zone = $(option.contentzone);
+		this.$conPrev = $(option.conPrev);
+		this.$conNext = $(option.conNext);
+		this.$topMenu = $(option.topMenu);
+		this.$topNext = $(option.topNext);
+		this.$topPrev = $(option.topPrev);
+		this.num = 0;
+
+		this.list.on('mouseenter', $.proxy(this.listHover,this));
+		this.$topNext.on('click', $.proxy(this.todayNext,this));
+		this.$topPrev.on('click', $.proxy(this.todayPrev,this));
+		this.$conNext.on('click', $.proxy(this.contentNext,this));
+		this.$conPrev.on('click', $.proxy(this.contentPrev,this));
 	};
-	var getHoverMenu = new hoverMenu('.container');
-	
+
+	HoverMenu.prototype.listHover = function(event) {
+		var getevent = $(event.target);
+		if (getevent.prop('tagName') == 'SPAN') getevent = getevent.parent();
+		
+		var $th = getevent,
+			conView = $($th.attr('href')),
+			$listAll = $(this.list);
+		
+		$listAll.removeClass('hover');
+		$th.addClass('hover');
+		this.$zone.css('display','none');
+		conView.css('display','block');
+	};
+
+	HoverMenu.prototype.contentPrev = function() {
+		var getevent = $(event.target);
+		if (getevent.prop('tagName') == 'SPAN') getevent = getevent.parent();
+
+		this.list.eq(this.num).trigger('mouseenter');
+		if(this.num <= 0){
+			this.num = this.list.length;
+		}
+		this.list.eq(this.num).trigger('mouseenter');
+		this.num--;
+		console.log(this.num)
+	};
+
+	HoverMenu.prototype.contentNext = function() {
+		var getevent = $(event.target);
+		if (getevent.prop('tagName') == 'SPAN') getevent = getevent.parent();
+		if(this.num >= this.list.length){
+			this.num = 0;
+		}
+		this.list.eq(this.num).trigger('mouseenter');
+		this.num++;
+		console.log(this.num)
+	};
+
+	HoverMenu.prototype.todayPrev = function(event) {
+
+		var getevent = $(event.target);
+		if (getevent.prop('tagName') == 'SPAN') getevent = getevent.parent();
+		
+		var $th = getevent,
+			length = this.$topMenu.length-1;
+
+		if (this.num <= 0)return false;
+			this.num --;
+			this.$topMenu.css('display','none')
+			this.$topMenu.eq(this.num).css('display','block');
+	}; 
+
+	HoverMenu.prototype.todayNext = function(event) {
+
+		var getevent = $(event.target);
+		if (getevent.prop('tagName') == 'SPAN') getevent = getevent.parent();
+		
+		var $th = getevent,
+			length = this.$topMenu.length-1;
+
+		if (this.num >=length)return false;
+
+			this.num ++;
+			this.$topMenu.css('display','none')
+			this.$topMenu.eq(this.num).css('display','block');
+	};
+
 </script>
 </body>
 </html>

@@ -34,7 +34,7 @@
 		
 		<div class="result">
 			<label for="addItem">좌측에 노드 삽입</label>
-			<input type="text" id="addItem" class="ItemName" />
+			<input type="text" id="addItem" />
 			<input type="button" value="삽입하기 버튼" />
 		</div>
 		<p>이동 시에는 제이쿼리의 .append를 활용해도 좋습니다. <br />
@@ -42,64 +42,70 @@
 		이 예제는 실제로 2년차 퍼블리셔에게 js의 능력을 평가하는 지표로서 naver가 활용하였습니다.<br />
 		다만 네이버 제시 예제보다 어렵습니다. 고고!</p>
 	<script>
-	
-		
-		 function appendList(selector) {
-		 		
-		 	var that = this;
+		$(function() {
+			var option = {
+				ItemSection : '.box',
+				ItemName : '#addItem',
+				resultButton : '.result input[type="button"]'
+			};
 
-		 	this.selector = $(selector);
-		 	this.list = this.selector.find('li');
-		 	this.buttonMom =this.selector.find('ul');
-		 	this.button =this.list.find('button');
+			var getMovelist = new Movelist(option);
+		});
 
-		 	this.buttonMom.on('click','li button',this.moveList);
-		 	this.addItemBtn.on('click',this.addItemList)
+		function Movelist(option) {
+
+			var that = this;
+			
+			this.$leftSection = $(option.ItemSection).eq(0);
+			this.$rightSection = $(option.ItemSection).eq(1);
+			this.leftArea = this.$leftSection.find('ul');
+			this.rightArea = this.$rightSection.find('ul');
+
+			this.$value = $(option.ItemName);
+			this.$result = $(option.resultButton);
+			this.button = $(option.buttonWrap).find('button');
+			this.buttonWrap = $(option.ItemSection).find('ul');
+
+			this.buttonWrap.on('click','button', $.proxy(this.moveItem, this) );
+			
+			// this.buttonWrap.on('click','li button',function(){
+			// 	that.moveItem(this);
+			// });
+
+			this.$result.on('click', function(){
+				that.addList(this);
+			});
+		};
+
+		Movelist.prototype.addList = function(obj){
+			var th = $(obj);
+				that = this,
+				value = $(that.$value).val(),
+				newList = '<li><span>'+value+'</span><button><span>우측이동</span></button></li>';
+
+				that.leftArea.append(newList);
+		};
+
+		Movelist.prototype.moveItem = function(event){
+			var $targetElement = $(event.target);
+			if($targetElement.prop("tagName") == 'SPAN') $targetElement = $targetElement.parent();
+			if($targetElement.prop("tagName") == 'LI') $targetElement =  $targetElement.find('button');
 
 
-		 };
+			var th = $targetElement,
+				that = this,
+				section = th.parents('section'),
+				getSection = section.get(0),
+				getLeft = that.$leftSection.get(0);
 
-
-		 	appendList.prototype.rightArea = this.selector.find('.side02 ul');
-		 	appendList.prototype.leftArea = this.selector.find('.side01 ul');
-		 	appendList.prototype.addItemBtn = this.selector.find('.result input[type=button]');
-		 	appendList.prototype.addItemFom = this.selector.find('.result input[type=text]');
-
-
-		 	// this.selector.on("addItem", fn);
-		 	// this.addItemBtn.on("click", function() { that.selector.trigger('addItem') });
-
-
-		 	appendList.prototype.addItemList = function() {
-
-		 		var textVal = that.addItemFom.val(),
-		 			$newItem = $('<li></li>'),
-		 			$innerText = $('<span></span>').text(textVal),
-		 			$btnText = $('<span></span>').text('우측이동'),
-		 			$innerBtn = $('<button></button>').attr('type','button');
-		 		$btnText.appendTo($innerBtn);
-		 		$newItem.append($innerText,$innerBtn);
-		 	    $newItem.appendTo(that.leftArea);
-		 	};
-			appendList.prototype.moveList = function() {
-
-		 		var $th = $(this); 
-		 		var itemIn =$th.parents('section');
-
-		 		if (itemIn.hasClass('side01')) {
-		 			$th.parent().appendTo('.side02 ul');
-		 			$th.find('span').text('좌측이동');
-		 		}else{
-		 			$th.parent().appendTo('.side01 ul');
-		 			$th.find('span').text('우측이동');
-		 		};
-		 		
-		 	};
-
-		 	
-		 var getAppendList1 = new appendList('#itemArea');
-		
-
+			if (getSection == getLeft) {
+				th.parent().appendTo($(that.rightArea));
+				th.find('span').text('좌측이동');
+			}else{
+				th.parent().appendTo($(that.leftArea));
+				th.find('span').text('우측이동');
+			}
+		};
 	</script>
 </body>
 </html>

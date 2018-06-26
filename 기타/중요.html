@@ -1,0 +1,32 @@
+
+ function active(){
+        var $th = $(this),
+            sct = $th.scrollTop();
+
+        if(sct >= contentArea.introduction && sct<contentArea.event){
+            header.removeClass('active2');
+            header.addClass('active1');
+            navMenu.children('li').removeClass('active');
+            navMenu.find('.item01').addClass('active');
+            if (sct>=contentArea.use &&sct<contentArea.product) {
+                navMenu.children('li').removeClass('active');
+                navMenu.find('.item02').addClass('active');
+            }else if(sct>=contentArea.product){
+                navMenu.children('li').removeClass('active');
+                navMenu.find('.item03').addClass('active');
+            }
+        }else if(sct >= contentArea.event) {
+            navMenu.children('li').removeClass('active');
+            navMenu.find('.item04').addClass('active');
+            header.removeClass('active1');
+            header.addClass('active2');
+            if(sct>=contentArea.store){
+                navMenu.children('li').removeClass('active');
+                navMenu.find('.item05').addClass('active');
+            }
+        }else{
+            header.removeClass('active2');
+            header.removeClass('active1');
+        }
+        console.log(sct);
+    };
